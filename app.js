@@ -1,9 +1,11 @@
+'use strict'
+
 var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
     methodOverride = require("method-override");
-mongoose = require('mongoose');
-
+var mongoose = require('mongoose');
+var UsersRoutes = require('./routes/users');
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -18,6 +20,15 @@ router.get('/', function (req, res) {
 
 app.use(router);
 
-app.listen(3000, function () {
+mongoose.connect('mongodb://localhost/users', function(err, res) {
+  if(err) {
+    console.log('ERROR: connecting to Database. ' + err);
+  }
+  app.listen(3000, function() {
     console.log("Node server running on http://localhost:3000");
+  });
 });
+
+app.use('/api',UsersRoutes);
+
+module.exports = app;
