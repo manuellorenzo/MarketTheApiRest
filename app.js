@@ -29,6 +29,6 @@ mongoose.connect('mongodb://localhost/users', function(err, res) {
   });
 });
 
-app.use('/api',UsersRoutes);
+app.use('/users',UsersRoutes);
 
 module.exports = app;

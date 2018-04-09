@@ -14,7 +14,7 @@ api.get('/findAllUsers', UsersController.findAllUsers);
 api.get('/findUserById/:id', UsersController.findUserById);
 
 api.post('/addUser', UsersController.addUser);
-
+api.post('/login', UsersController.login);
 api.put('/updateUser/:id', UsersController.updateUser);
 
 api.delete('/deleteUser/:id', UsersController.deleteUser);

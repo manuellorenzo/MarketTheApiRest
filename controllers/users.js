@@ -57,10 +57,24 @@ function deleteUser(req, res) {
         })
     });
 };
+
+function login(req, res) {
+    Users.findOne({
+        'username': req.body.username,
+        'password': req.body.password
+    }, function (err, user) {
+        if(!user){
+            return res.status(404).send('Usuario no encontrado');
+        }else{
+            res.status(200).send(user);
+        }
+    });
+}
 module.exports = {
     findAllUsers,
     findUserById,
     addUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    login
 };
