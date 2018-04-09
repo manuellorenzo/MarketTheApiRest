@@ -63,11 +63,19 @@ function login(req, res) {
         'username': req.body.username,
         'password': req.body.password
     }, function (err, user) {
-        if(!user){
-            return res.status(404).send({'code':404});
-        }else{
+        if (!user) {
+            return res.send({
+                'code': 404
+            });
+        } else {
             user.code = 200;
-            res.status(200).jsonp({'code':200, 'username':user.username,'password':user.password, 'email':user.email});
+            res.status(200).jsonp({
+                'code': 200,
+                '_id': user._id,
+                'username': user.username,
+                'password': user.password,
+                'email': user.email
+            });
         }
     });
 }
