@@ -64,9 +64,10 @@ function login(req, res) {
         'password': req.body.password
     }, function (err, user) {
         if(!user){
-            return res.status(404).send('Usuario no encontrado');
+            return res.status(404).send({'code':404});
         }else{
-            res.status(200).send(user);
+            user.code = 200;
+            res.status(200).jsonp({'code':200, 'username':user.username,'password':user.password, 'email':user.email});
         }
     });
 }
