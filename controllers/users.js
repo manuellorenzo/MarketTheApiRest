@@ -36,26 +36,32 @@ function findUserById(req, res) {
 function addUser(req, res) {
     console.log('POST');
     console.log(req.body);
+    if (req.body.username != "" && req.body.password != "" && req.body.email != "") {
+        var user = new Users({
+            username: req.body.username,
+            password: req.body.password,
+            email: req.body.email
+        });
 
-    var user = new Users({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email
-    });
-
-    user.save(function (err, user) {
-        if (err) return res.status(500).send({
+        user.save(function (err, user) {
+            if (err) return res.status(500).send({
+                'code': 500,
+                'error': err.message
+            });
+            res.status(200).jsonp({
+                'code': 200,
+                '_id': user._id,
+                'username': user.username,
+                'password': user.password,
+                'email': user.email
+            });
+        });
+    } else {
+        return res.jsonp({
             'code': 500,
-            'error': err.message
-        });
-        res.status(200).jsonp({
-            'code': 200,
-            '_id': user._id,
-            'username': user.username,
-            'password': user.password,
-            'email': user.email
-        });
-    });
+            'error': 'Empty fields'
+        })
+    }
 };
 
 function updateUser(req, res) {
