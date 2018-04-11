@@ -72,7 +72,8 @@ function updateList(req, res) {
                 '_id': list._id,
                 'idUser': list.idUser,
                 'name': list.name,
-                'cards': list.cards
+                'cards': list.cards,
+                'status': 'updated'
             });
         });
     });
