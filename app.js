@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 var UsersRoutes = require('./routes/users');
 var MyWantsListsController = require('./routes/MyWantsLists');
 var router = express.Router();
-
+var url ='mongodb://root:root@ds229448.mlab.com:29448/marketthegathering'
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,12 +22,12 @@ router.get('/', function (req, res) {
   res.send("Hello World!");
 });
 
-mongoose.connect('mongodb://localhost/users', function (err, res) {
+mongoose.connect(url, function (err, res) {
   if (err) {
     console.log('ERROR: connecting to Database. ' + err);
   }
   app.listen(3000, function () {
-    console.log("Node server running on http://localhost:3000");
+    console.log("Node server running on "+url);
   });
 });
 
